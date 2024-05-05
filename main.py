@@ -58,6 +58,3 @@ with mlflow.start_run(experiment_id=experiment.experiment_id):
     # Log model
     mlflow.sklearn.log_model(model, "random_forest_model")
 
-
-loaded_model = mlflow.sklearn.load_model("random_forest_model")
-
