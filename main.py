@@ -1,9 +1,10 @@
+import pandas as pd
 import mlflow
-import mlflow.sklearn
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+
 from sklearn.preprocessing import StandardScaler
+
 from sklearn.metrics import accuracy_score
 
 # Set the MLflow tracking URI
@@ -11,9 +12,12 @@ mlflow_tracking_uri = "http://localhost:8080"
 mlflow.set_tracking_uri(mlflow_tracking_uri)
 print(f"MLflow tracking URI set to {mlflow_tracking_uri}")
 
-# Load sample data
-data = load_iris()
-X, y = data.data, data.target
+# load data
+df = pd.read_csv("water_potability.csv")
+
+# Set X and y
+X = df.drop(columns=["Potability"])
+y = df["Potability"]
 
 # Train-validation split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
